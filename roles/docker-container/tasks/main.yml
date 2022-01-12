@@ -1,0 +1,12 @@
+---
+- include_tasks: traefik.yml
+- include_tasks: homer.yml
+- include_tasks: portainer.yml
+- include_tasks: watchtower.yml
+- include_tasks: flaresolverr.yml
+- include_tasks: vaultwarden.yml
+- include_tasks: transmission-openvpn.yml
+- include_tasks: sonarr.yml
+- include_tasks: radarr.yml
+- include_tasks: prowlarr.yml
+- include_tasks: overseerr.yml
