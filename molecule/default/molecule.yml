@@ -2,7 +2,7 @@
 dependency:
   name: galaxy
 driver:
-  name: podman
+  name: docker
 lint: |
   set -e
   yamllint .
@@ -17,10 +17,5 @@ platforms:
     pre_build_image: true
 provisioner:
   name: ansible
-  options:
-    vvv: True
-  config_options:
-    defaults:
-      vault_identity_list: vault_pass@/home/lydien/Projets/homelab-docker/scripts/vault-keyring-client.py
 verifier:
   name: ansible
