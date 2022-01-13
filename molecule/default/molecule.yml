@@ -10,12 +10,18 @@ lint: |
 platforms:
   - name: molecule
     image: "geerlingguy/docker-${MOLECULE_DISTRO:-rockylinux8}-ansible:latest"
-    command: ""
     volumes:
       - /sys/fs/cgroup/:/sys/fs/cgroup:ro
+    command: ""
     privileged: true
     pre_build_image: true
 provisioner:
   name: ansible
+  config_options:
+    defaults:
+      interpreter_python: auto_silent
+      callback_whitelist: profile_tasks, timer, yaml
+    ssh_connection:
+      pipelining: false
 verifier:
   name: ansible
