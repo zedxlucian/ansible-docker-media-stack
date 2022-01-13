@@ -32,6 +32,7 @@
   - name: Update cache
     apt:
       update_cache: true
+      cache_valid_time: 3600
 
 - name: Generate the locale (Debian and Ubuntu)
   when: ansible_os_family == 'Debian'
