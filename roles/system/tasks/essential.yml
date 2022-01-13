@@ -48,11 +48,11 @@
   hostname:
     name: "{{ inventory_hostname }}"
 
-- name: Replace the hostname entry with our own
-  lineinfile:
-    path: /etc/hosts
-    insertafter: ^127\.0\.0\.1 *localhost
-    line: "127.0.0.1 {{ inventory_hostname }}"
-    owner: root
-    group: root
-    mode: '0644'
+# - name: Replace the hostname entry with our own
+#   lineinfile:
+#     path: /etc/hosts
+#     insertafter: ^127\.0\.0\.1 *localhost
+#     line: "127.0.0.1 {{ inventory_hostname }}"
+#     owner: root
+#     group: root
+#     mode: '0644'
