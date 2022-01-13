@@ -34,12 +34,6 @@
       update_cache: true
       cache_valid_time: 3600
 
-- name: Generate the locale (Debian and Ubuntu)
-  when: ansible_os_family == 'Debian'
-  locale_gen:
-    name: "{{ locale }}"
-    state: present
-
 - name: Check if reboot required
   stat:
     path: /var/run/reboot-required
@@ -54,11 +48,11 @@
   hostname:
     name: "{{ inventory_hostname }}"
 
-# - name: Replace the hostname entry with our own
-#   ansible.builtin.lineinfile:
-#     path: /etc/hosts
-#     insertafter: ^127\.0\.0\.1 *localhost
-#     line: "127.0.0.1 {{ inventory_hostname }}"
-#     owner: root
-#     group: root
-#     mode: '0644'
+- name: Replace the hostname entry with our own
+  lineinfile:
+    path: /etc/hosts
+    insertafter: ^127\.0\.0\.1 *localhost
+    line: "127.0.0.1 {{ inventory_hostname }}"
+    owner: root
+    group: root
+    mode: '0644'
