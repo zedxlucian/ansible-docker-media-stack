@@ -33,7 +33,7 @@ git clone https://github.com/zedxlucian/ansible-docker-media-stack.git
 cd ansible-docker-media-stack
 #+end_src
 
-Now, you neeed to fill some variables before you can run this project. Open the file =group_vars/all= and change the values in the variable according to your needs. Now open the file =group_vars/secret.yml= and change the values.
+Now, you need to fill some variables before you can run this project. Open the file =group_vars/all= and change the values in the variable according to your needs. Now open the file =group_vars/secret.yml= and change the values.
 
 Now you need to encrypt =group_vars/secret.yml= because it contains sensitive informations. To do so, type this command:
 #+begin_src shell
