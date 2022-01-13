@@ -11,6 +11,7 @@
 - name: Create Prowlarr container
   become: true
   become_user: "{{ username }}"
+  when: not enable_traefik
   community.docker.docker_container:
     name: prowlarr
     image: "ghcr.io/linuxserver/prowlarr:develop"

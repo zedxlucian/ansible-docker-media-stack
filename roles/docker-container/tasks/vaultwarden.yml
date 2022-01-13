@@ -11,6 +11,7 @@
 - name: Create Vaultwarden container
   become: true
   become_user: "{{ username }}"
+  when: not enable_traefik
   community.docker.docker_container:
     name: vaultwarden
     image: "vaultwarden/server:latest"

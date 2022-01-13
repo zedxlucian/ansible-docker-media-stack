@@ -11,6 +11,7 @@
 - name: Create Portainer container
   become: true
   become_user: "{{ username }}"
+  when: not enable_traefik
   community.docker.docker_container:
     name: portainer
     image: "cr.portainer.io/portainer/portainer-ce:2.11.0"

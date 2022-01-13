@@ -16,6 +16,7 @@
 - name: Create Sonarr container
   become: true
   become_user: "{{ username }}"
+  when: not enable_traefik
   community.docker.docker_container:
     name: sonarr
     image: "ghcr.io/linuxserver/sonarr"
