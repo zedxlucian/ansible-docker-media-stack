@@ -24,6 +24,25 @@
       "PGID": "{{ username_gid | string }}"
       "TZ": "{{ timezone }}"
     restart_policy: unless-stopped
+    ports:
+      - 5055:5055
+
+- name: Create Overseerr container with Traefik Labels
+  become: true
+  become_user: "{{ username }}"
+  when: enable_traefik
+  community.docker.docker_container:
+    name: overseerr
+    image: "lscr.io/linuxserver/overseerr"
+    pull: true
+    state: started
+    volumes:
+      - "{{ docker_data_path }}/overseerr/config:/config:rw"
+    env:
+      "PUID": "{{ username_uid | string }}"
+      "PGID": "{{ username_gid | string }}"
+      "TZ": "{{ timezone }}"
+    restart_policy: unless-stopped
     networks:
       - name: "{{ docker_proxy_network }}"
     ports:

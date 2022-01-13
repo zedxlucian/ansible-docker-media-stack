@@ -25,6 +25,26 @@
       "PGID": "{{ username_gid | string }}"
       "TZ": "{{ timezone }}"
     restart_policy: unless-stopped
+    ports:
+      - 9696:9696
+
+- name: Create Prowlarr container with Traefik Labels
+  become: true
+  become_user: "{{ username }}"
+  when: enable_traefik
+  community.docker.docker_container:
+    name: prowlarr
+    image: "ghcr.io/linuxserver/prowlarr:develop"
+    pull: true
+    state: started
+    volumes:
+      - "{{ docker_data_path }}/prowlarr/config:/config:rw"
+      - "{{ volume_bind_download_torrent_watch }}:/downloads:rw"
+    env:
+      "PUID": "{{ username_uid | string }}"
+      "PGID": "{{ username_gid | string }}"
+      "TZ": "{{ timezone }}"
+    restart_policy: unless-stopped
     networks:
       - name: "{{ docker_proxy_network }}"
     ports:

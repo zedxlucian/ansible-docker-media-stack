@@ -24,6 +24,23 @@
       "GID": "{{ username_gid | string }}"
       "TZ": "{{ timezone }}"
     restart_policy: unless-stopped
+
+- name: Create Homer Container with Traefik Labels
+  become: true
+  become_user: "{{ username }}"
+  when: enable_traefik
+  community.docker.docker_container:
+    name: homer
+    image: "b4bz/homer"
+    pull: true
+    state: started
+    volumes:
+      - "{{ docker_data_path }}/homer/assets:/www/assets:rw"
+    env:
+      "UID": "{{ username_uid | string }}"
+      "GID": "{{ username_gid | string }}"
+      "TZ": "{{ timezone }}"
+    restart_policy: unless-stopped
     networks:
       - name: "{{ docker_proxy_network }}"
     labels:

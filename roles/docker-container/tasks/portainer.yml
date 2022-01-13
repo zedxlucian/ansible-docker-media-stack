@@ -26,6 +26,29 @@
       "PGID": "{{ username_gid | string }}"
       "TZ": "{{ timezone }}"
     restart_policy: unless-stopped
+    ports:
+      - 9000:9000
+    security_opts:
+      - "no-new-privileges:true"
+
+- name: Create Portainer container with Traefik Labels
+  become: true
+  become_user: "{{ username }}"
+  when: enable_traefik
+  community.docker.docker_container:
+    name: portainer
+    image: "cr.portainer.io/portainer/portainer-ce:2.11.0"
+    pull: true
+    state: started
+    volumes:
+      - "{{ docker_data_path }}/portainer/data:/data:rw"
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /etc/localtime:/etc/localtime:ro
+    env:
+      "PUID": "{{ username_uid | string }}"
+      "PGID": "{{ username_gid | string }}"
+      "TZ": "{{ timezone }}"
+    restart_policy: unless-stopped
     networks:
       - name: "{{ docker_proxy_network }}"
     ports:

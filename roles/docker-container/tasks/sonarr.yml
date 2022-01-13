@@ -21,7 +21,29 @@
     name: sonarr
     image: "ghcr.io/linuxserver/sonarr"
     pull: true
-    state: present
+    state: started
+    volumes:
+      - "{{ docker_data_path }}/sonarr/config:/config:rw"
+      - "{{ volume_bind_gmedia_series }}:/series:rw"
+      - "{{ volume_bind_gmedia_anime }}:/anime:rw"
+      - "{{ volume_bind_download }}:/downloads:rw"
+    env:
+      "PUID": "{{ username_uid | string }}"
+      "PGID": "{{ username_gid | string }}"
+      "TZ": "{{ timezone }}"
+    restart_policy: unless-stopped
+    ports:
+      - 8989:8989
+
+- name: Create Sonarr container with Traefik Labels
+  become: true
+  become_user: "{{ username }}"
+  when: enable_traefik
+  community.docker.docker_container:
+    name: sonarr
+    image: "ghcr.io/linuxserver/sonarr"
+    pull: true
+    state: started
     volumes:
       - "{{ docker_data_path }}/sonarr/config:/config:rw"
       - "{{ volume_bind_gmedia_series }}:/series:rw"

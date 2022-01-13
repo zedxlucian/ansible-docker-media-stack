@@ -29,6 +29,27 @@
       "PGID": "{{ username_gid | string }}"
       "TZ": "{{ timezone }}"
     restart_policy: unless-stopped
+    ports:
+      - 7878:7878
+
+- name: Create Radarr container
+  become: true
+  become_user: "{{ username }}"
+  when: enable_traefik
+  community.docker.docker_container:
+    name: radarr
+    image: "ghcr.io/linuxserver/radarr"
+    pull: true
+    state: started
+    volumes:
+      - "{{ docker_data_path }}/radarr/config:/config:rw"
+      - "{{ volume_bind_gmedia_movies }}:/films:rw"
+      - "{{ volume_bind_download }}:/downloads:rw"
+    env:
+      "PUID": "{{ username_uid | string }}"
+      "PGID": "{{ username_gid | string }}"
+      "TZ": "{{ timezone }}"
+    restart_policy: unless-stopped
     networks:
       - name: "{{ docker_proxy_network }}"
     ports:
