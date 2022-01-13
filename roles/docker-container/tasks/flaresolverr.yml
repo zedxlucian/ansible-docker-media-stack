@@ -15,7 +15,5 @@
       "LOG_HTML": "${LOG_HTML:-false}"
       "CAPTCHA_SOLVER": "${CAPTCHA_SOLVER:-none}"
     restart_policy: unless-stopped
-    networks:
-      - name: "{{ docker_proxy_network }}"
     ports:
       - 8191:8191
