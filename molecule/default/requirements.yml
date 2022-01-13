@@ -1,8 +1,4 @@
 ---
-collections:
-- community.docker
-roles:
 - src: geerlingguy.repo-epel
 - src: geerlingguy.pip
 - src: geerlingguy.docker
-- src: community.docker
