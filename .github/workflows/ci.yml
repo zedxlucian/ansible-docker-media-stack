@@ -34,7 +34,6 @@ jobs:
       matrix:
         distro:
           - rockylinux8
-          - debian10
           - ubuntu2004
 
     steps:
@@ -47,13 +46,7 @@ jobs:
           python-version: '3.x'
 
       - name: Install test dependencies.
-        run: pip3 install ansible molecule[docker] docker yamllint ansible-lint
-
-      - name: Lint code.
-        run: |
-          set -e
-          yamllint .
-          ansible-lint
+        run: pip3 install ansible molecule[docker] docker
 
       - name: Run Molecule tests.
         run: molecule test
