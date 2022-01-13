@@ -53,7 +53,7 @@ epel_repo_url: "http://download.fedoraproject.org/pub/epel/{{ ansible_distributi
 epel_repo_gpg_key_url: "/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}"
 
 # Enable or disable containers
-enable_traefik: true
+enable_traefik: false
 enable_homer: true
 enable_portainer: true
 enable_watchtower: true
