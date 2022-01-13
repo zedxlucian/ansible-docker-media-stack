@@ -53,6 +53,7 @@
 
 - name: Copy the public ssh key
   become: true
+  when: enable_ssh_authentification
   authorized_key:
     user: "{{ username }}"
     state: present

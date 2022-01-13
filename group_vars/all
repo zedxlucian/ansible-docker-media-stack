@@ -4,6 +4,7 @@ username_gid: 1000
 shell: /bin/bash
 locale: en_US.UTF-8
 keyboard_layout: fr
+enable_ssh_authentification: false
 dotfiles_repo: https://github.com/zedxlucian/dotfiles
 install_dotfiles: true
 enable_snap: false
